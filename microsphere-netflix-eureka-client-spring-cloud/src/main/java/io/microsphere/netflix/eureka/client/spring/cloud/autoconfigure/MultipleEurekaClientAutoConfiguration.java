@@ -193,7 +193,7 @@ public class MultipleEurekaClientAutoConfiguration {
     private EurekaClient createCustomizedEurekaClient(EurekaClientConfig eurekaClientConfig, int index) {
         EurekaClientConfig customizedEurekaClientConfig = customizeEurekaClientConfig(eurekaClientConfig, index);
         EurekaClient eurekaClient = new DiscoveryClient(this.applicationInfoManager.getIfAvailable(),
-                customizedEurekaClientConfig, this.transportClientFactories.getIfAvailable(), this.optionalArgs.getIfAvailable());
+                customizedEurekaClientConfig, this.optionalArgs.getIfAvailable());
         return eurekaClient;
     }
 

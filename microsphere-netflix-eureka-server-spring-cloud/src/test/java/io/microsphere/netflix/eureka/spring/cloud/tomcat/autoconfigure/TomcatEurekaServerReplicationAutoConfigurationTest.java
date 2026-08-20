@@ -51,13 +51,16 @@ class TomcatEurekaServerReplicationAutoConfigurationTest {
 
     @Test
     void test() throws Throwable {
+
+        System.setProperty("org.springframework.boot.logging.LoggingSystem", "none");
+
         int count = 2;
         ExecutorService executorService = newFixedThreadPool(count);
 
         CompletionService<ConfigurableApplicationContext> completionService = new ExecutorCompletionService<>(executorService);
         for (int i = 0; i < count; i++) {
             final int port = 12345 + i;
-            completionService.submit(() -> run(EurekaServerApplication.class, "--server.port=" + port));
+            completionService.submit(() -> run(EurekaServerApplication.class, "--server.port=" + port, "--logging.config=classpath:logback.xml"));
         }
 
         List<ConfigurableApplicationContext> contexts = newArrayList(count);

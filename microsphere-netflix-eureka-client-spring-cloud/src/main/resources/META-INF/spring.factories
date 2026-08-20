@@ -1,2 +1,6 @@
 org.springframework.context.ApplicationContextInitializer=\
 io.microsphere.netflix.eureka.client.spring.cloud.context.EurekaClientApplicationContextInitializer
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.microsphere.netflix.eureka.client.spring.cloud.autoconfigure.EnhancedEurekaClientAutoConfiguration,\
+io.microsphere.netflix.eureka.client.spring.cloud.autoconfigure.MultipleEurekaClientAutoConfiguration

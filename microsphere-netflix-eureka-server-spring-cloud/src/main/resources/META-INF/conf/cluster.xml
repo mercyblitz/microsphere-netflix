@@ -4,7 +4,7 @@
     /docs/config/cluster.html (reference documentation) -->
 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="74">
 
-    <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+    <Channel className="org.apache.catalina.tribes.group.GroupChannel" jmxEnabled="false">
 
         <Membership className="org.apache.catalina.tribes.membership.McastService"
                     address="${microsphere.tomcat.cluster.membership.multicast.address:228.0.0.4}"

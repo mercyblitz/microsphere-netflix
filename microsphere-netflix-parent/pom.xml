@@ -20,35 +20,126 @@
 
     <properties>
         <microsphere-spring-cloud.version>0.1.25</microsphere-spring-cloud.version>
-        <microsphere-bom.version>0.3.9</microsphere-bom.version>
+        <tomcat.version>9.0.75</tomcat.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- Apache Tomcat -->
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-api</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-catalina</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-catalina-ant</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-catalina-ha</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-coyote</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-coyote-ffm</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-dbcp</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jasper</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jasper-el</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jaspic-api</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jdbc</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jni</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-juli</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-ssi</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-storeconfig</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-tribes</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-util</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-util-scan</artifactId>
+                <version>${tomcat.version}</version>
+            </dependency>
 
             <!-- Microsphere Spring Cloud Dependencies -->
             <dependency>
                 <groupId>io.github.microsphere-projects</groupId>
                 <artifactId>microsphere-spring-cloud-dependencies</artifactId>
                 <version>${microsphere-spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Microsphere Jakarta EE -->
-            <dependency>
-                <groupId>io.github.microsphere-projects</groupId>
-                <artifactId>microsphere-javaee-bom</artifactId>
-                <version>${microsphere-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Microsphere Tomcat BOM -->
-            <dependency>
-                <groupId>io.github.microsphere-projects</groupId>
-                <artifactId>microsphere-tomcat-bom</artifactId>
-                <version>${microsphere-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

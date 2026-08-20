@@ -37,7 +37,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 @Documented
-@ConditionalOnProperty(value = "eureka.client.enabled", matchIfMissing = true)
-@ConditionalOnProperty(name = EUREKA_CLIENT_ENABLED_PROPERTY_NAME, matchIfMissing = true)
+@ConditionalOnProperty(
+        name = {
+                "eureka.client.enabled",
+                EUREKA_CLIENT_ENABLED_PROPERTY_NAME
+        },
+        matchIfMissing = true
+)
 public @interface ConditionalOnEurekaClientEnabled {
 }
