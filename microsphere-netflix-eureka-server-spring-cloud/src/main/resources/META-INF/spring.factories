@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.microsphere.netflix.eureka.spring.cloud.tomcat.autoconfigure.TomcatEurekaServerReplicationAutoConfiguration
+io.microsphere.netflix.eureka.server.spring.cloud.tomcat.autoconfigure.TomcatEurekaServerReplicationAutoConfiguration
