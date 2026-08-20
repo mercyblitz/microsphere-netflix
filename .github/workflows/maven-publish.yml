@@ -10,11 +10,11 @@ name: Maven Publish
 
 on:
   push:
-    branches: [ 'release' ]
+    branches: [ 'release-1.x' ]
   workflow_dispatch:
     inputs:
       revision:
-        description: 'The version to publish for Spring Cloud 2022+ and JDK 17+'
+        description: 'The version to publish for Spring Cloud Hoxton to 2021'
         required: true
         default: '${major}.${minor}.${patch}'
 
