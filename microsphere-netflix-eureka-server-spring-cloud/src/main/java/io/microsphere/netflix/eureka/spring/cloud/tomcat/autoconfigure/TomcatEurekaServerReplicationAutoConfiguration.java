@@ -22,9 +22,6 @@ import io.microsphere.logging.Logger;
 import io.microsphere.netflix.eureka.spring.cloud.EurekaServerProperties;
 import io.microsphere.netflix.eureka.spring.cloud.tomcat.servlet.listener.EurekaServerListener;
 import io.microsphere.netflix.eureka.spring.cloud.tomcat.servlet.listener.ReplicatedInstanceListener;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextAttributeEvent;
-import javax.servlet.ServletContextAttributeListener;
 import org.apache.catalina.Context;
 import org.apache.catalina.Host;
 import org.apache.catalina.connector.Connector;
@@ -55,6 +52,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.StringValueResolver;
 import org.xml.sax.InputSource;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextAttributeEvent;
+import javax.servlet.ServletContextAttributeListener;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -76,7 +76,6 @@ import static org.springframework.util.StreamUtils.copyToString;
  * @see EurekaServerListener
  * @see ReplicatedInstanceListener
  * @see org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration
- * @see org.springframework.boot.tomcat.autoconfigure.servlet.TomcatServletWebServerAutoConfiguration
  * @see org.springframework.cloud.netflix.eureka.server.EurekaServerAutoConfiguration
  * @see TomcatServletWebServerFactory
  * @see org.apache.catalina.startup.Tomcat
@@ -94,7 +93,6 @@ import static org.springframework.util.StreamUtils.copyToString;
 @AutoConfigureAfter(
         name = {
                 "org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration",   // Spring Boot [2.0, 4.0)
-                "org.springframework.boot.tomcat.autoconfigure.servlet.TomcatServletWebServerAutoConfiguration", // Spring Boot [4.0,)
                 "org.springframework.cloud.netflix.eureka.server.EurekaServerAutoConfiguration"                  // Spring Cloud Netflix Eureka Server API
         }
 )

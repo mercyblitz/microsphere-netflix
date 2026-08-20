@@ -60,7 +60,7 @@ class TomcatEurekaServerReplicationAutoConfigurationTest {
         CompletionService<ConfigurableApplicationContext> completionService = new ExecutorCompletionService<>(executorService);
         for (int i = 0; i < count; i++) {
             final int port = 12345 + i;
-            completionService.submit(() -> run(EurekaServerApplication.class, "--server.port=" + port, "--logging.config=classpath:logback.xml"));
+            completionService.submit(() -> run(EurekaServerApplication.class, "--server.port=" + port));
         }
 
         List<ConfigurableApplicationContext> contexts = newArrayList(count);

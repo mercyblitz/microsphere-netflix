@@ -24,7 +24,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
 /**
  * Eureka Server Application
  *
