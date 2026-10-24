@@ -1,6 +1,6 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -23,6 +23,10 @@ import com.netflix.discovery.converters.wrappers.CodecWrapper;
 import com.netflix.discovery.shared.Applications;
 import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
 import com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
+import org.springframework.cloud.netflix.eureka.InstanceInfoFactory;
 
 import java.io.IOException;
 import java.util.Map;
@@ -32,8 +36,10 @@ import static com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl.Action.H
 import static com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl.Action.Register;
 import static io.microsphere.netflix.eureka.server.spring.cloud.tomcat.servlet.listener.EurekaServerListener.getCodecWrapper;
 import static io.microsphere.netflix.eureka.server.spring.cloud.tomcat.servlet.listener.ReplicatedInstanceListener.get;
+import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
  * {@link ReplicatedInstanceListener} Test
@@ -42,9 +48,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
  * @see ReplicatedInstanceListener
  * @since 1.0.0
  */
+@Disabled
 class ReplicatedInstanceListenerTest extends EurekaServerTest {
 
-    // @Test
+    @Test
     void test() throws Throwable {
         ReplicatedInstanceListener listener = get(this.servletContext);
 
@@ -52,12 +59,12 @@ class ReplicatedInstanceListenerTest extends EurekaServerTest {
         testProcessRegisteredInstances(listener);
 
         // test process method
+        testProcess(listener, Register);
         testProcess(listener, Heartbeat);
         testProcess(listener, Cancel);
-        testProcess(listener, Register);
     }
 
-    private void testProcessRegisteredInstances(ReplicatedInstanceListener listener) throws InterruptedException {
+    void testProcessRegisteredInstances(ReplicatedInstanceListener listener) throws InterruptedException {
         PeerAwareInstanceRegistry registry = listener.getRegistry();
         Applications applications = registry.getApplications();
         while (applications.size() == 0) {
@@ -69,15 +76,23 @@ class ReplicatedInstanceListenerTest extends EurekaServerTest {
     }
 
     void testProcess(ReplicatedInstanceListener listener, PeerAwareInstanceRegistryImpl.Action action) throws IOException {
-        CodecWrapper codecWrapper = getCodecWrapper(super.eurekaServerContext);
-        InstanceInfo clonedInstanceInfo = new InstanceInfo(this.instanceInfo);
+        EurekaInstanceConfigBean eurekaInstanceConfigBean = new EurekaInstanceConfigBean(super.inetUtils);
+        copyProperties(super.eurekaInstanceConfigBean, eurekaInstanceConfigBean);
 
-        String actionKey = this.eurekaServerProperties.getActionKey();
-        Map<String, String> metadata = clonedInstanceInfo.getMetadata();
+        eurekaInstanceConfigBean.setAppname("test-app");
+        eurekaInstanceConfigBean.setInstanceId("test-instance-" + currentTimeMillis());
+
+        InstanceInfoFactory instanceInfoFactory = new InstanceInfoFactory();
+        InstanceInfo instanceInfo = instanceInfoFactory.create(eurekaInstanceConfigBean);
+
+        CodecWrapper codecWrapper = getCodecWrapper(super.eurekaServerContext);
+
+        String actionKey = super.eurekaServerProperties.getActionKey();
+        Map<String, String> metadata = instanceInfo.getMetadata();
         metadata.put(actionKey, action.name());
 
-        String json = codecWrapper.encode(clonedInstanceInfo);
+        String json = codecWrapper.encode(instanceInfo);
         listener.process(json);
-        listener.process(clonedInstanceInfo, null);
+        listener.process(instanceInfo, null);
     }
 }

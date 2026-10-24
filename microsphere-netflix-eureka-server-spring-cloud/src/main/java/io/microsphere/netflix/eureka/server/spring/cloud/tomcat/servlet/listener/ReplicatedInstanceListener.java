@@ -100,6 +100,7 @@ public class ReplicatedInstanceListener implements ServletContextListener, Chann
     public void contextInitialized(ServletContextEvent event) {
         this.scheduledThreadPoolExecutor.prestartCoreThread();
         this.servletContext = event.getServletContext();
+        this.servletContext.setAttribute(ATTRIBUTE_NAME, this);
         processRegisteredInstancesOnSchedule();
     }
 
@@ -250,12 +251,12 @@ public class ReplicatedInstanceListener implements ServletContextListener, Chann
     }
 
     @Nonnull
-    PeerAwareInstanceRegistry getRegistry() {
+    public PeerAwareInstanceRegistry getRegistry() {
         return getEurekaServerContext().getRegistry();
     }
 
     @Nonnull
-    EurekaServerContext getEurekaServerContext() {
+    public EurekaServerContext getEurekaServerContext() {
         return this.eurekaServerContext;
     }
 
